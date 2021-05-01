@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GCD Calculator</title>
+    <style>
+        html {
+            font-family: 'Ubuntu';
+            background-color: black;
+        }
+
+        .result {
+            color: white;
+            font-weight: bold;
+
+        }
+
+        .title {
+
+            text-align: center;
+            font-weight: bold;
+            font-size: 3rem;
+            color: greenyellow;
+        }
+
+        .title:hover {
+            cursor: default;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: nowrap;
+
+            justify-content: space-between;
+            margin-top: 50px;
+            margin-left: 20rem;
+            margin-right: 20rem;
+        }
+
+        #result {
+            display: none;
+            color: white;
+            font-size: 3rem;
+            width: 100%;
+            text-align: center;
+        }
+
+        .TextBox {
+            height: 15px;
+            width: 200px;
+            outline: none;
+            padding: 15px;
+            font-size: large;
+            font-family: 'Ubuntu';
+            margin: 0;
+            border-radius: 10px;
+
+        }
+
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        .cal {
+            margin: 2rem;
+            display: flex;
+            justify-content: center;
+            flex-wrap: nowrap;
+        }
+
+        .btn {
+            height: 3rem;
+            width: 200px;
+            outline: none;
+            text-align: center;
+            background-color: rgb(0, 174, 255);
+            font-size: large;
+
+            margin: 0;
+            border-radius: 10px;
+        }
+
+        .btn:hover {
+            cursor: pointer;
+            outline: none;
+            background-color: rgb(0, 153, 255);
+        }
+
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="title">
+        GCD Calculator
+    </div>
+    <div class="container">
+        <div class="Number">
+            <input type="number" class="TextBox" id="first" placeholder="Enter First Number"
+                onclick="glow('first','second')">
+        </div>
+        <div class="Number">
+            <input type="number" class="TextBox" id="second" placeholder="Enter Second Number"
+                onclick="glow('second','first')">
+        </div>
+    </div>
+
+    <div class="cal">
+        <input type="button" value="Calculate GCD" class="btn" id="calculate">
+    </div>
+
+    <div id="result">
+
+    </div>
+</body>
+<script>
+
+    function glow(name, name2) {
+        document.getElementById(name).style.boxShadow = '-1px 0px 4px 2px lightseagreen'
+        unglow(name2);
+    }
+    function unglow(name) {
+        document.getElementById(name).style.boxShadow = '0px 0px 0px 0px black'
+    }
+
+
+
+
+    let btn = document.getElementById("calculate");
+    function gcd(a, b) {
+        console.log(a);
+        console.log(b);
+        if (b == 0) {
+            return (a);
+        }
+        return (gcd(b, a % b));
+    }
+    btn.onclick = function tell() {
+        let num1 = document.getElementById('first').value;
+        let num2 = document.getElementById('second').value;
+        let flag = 0;
+        if (num1 == '' || num2 == '') {
+            alert("Please Enter the Numbers")
+            flag = 1;
+        }
+        if (flag == 0) {
+
+
+
+            let ans = "The GCD of " + num1 + " and " + num2 + " is " + gcd(num1, num2);
+            document.getElementById('result').style.display = 'block';
+            document.getElementById('result').innerHTML = ans;
+        }
+
+    }
+</script>
+
+</html>
